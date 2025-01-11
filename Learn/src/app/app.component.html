@@ -1,15 +1,17 @@
 <h1 class="fw-bold text-center">
-  Parent Component {{Interpolation}}
+  Learn Angular
 </h1>
 
-<ul>
-  <li>
-    {{data.name}}
-  </li>
-  <li>
-    {{data.version}}
-  </li>
-</ul>
-
-<app-new-component> </app-new-component>
-
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <app-course-card [Course]='bestCourse'> </app-course-card>
+    </div>
+    <div class="col">
+      <app-course-card [Course]='secondBestCourse'></app-course-card>
+    </div>
+    <div class="col">
+      <app-course-card [Course]='thirdBestCourse'> </app-course-card>
+    </div>
+  </div>
+</div>
