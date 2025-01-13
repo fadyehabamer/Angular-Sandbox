@@ -1,15 +1,19 @@
-<h1>
-  Parent Component {{Interpolation}}
-</h1>
+<app-header></app-header>
+<div class="wrapper">
+  
+  <router-outlet>
+    <div class="container">
+      <div class="row">
+        
+          <app-product
+           *ngFor="let product of products" 
+           [product]="product"
+           (productOutput)="onProductOutput($event)" 
+           class="col-6 col-md-4"> </app-product>
+     
+      </div>
+    </div>
+  </router-outlet>
+</div>
 
-<ul>
-  <li>
-    {{data.name}}
-  </li>
-  <li>
-    {{data.version}}
-  </li>
-</ul>
-
-<app-new-component> </app-new-component>
-
+<app-footer></app-footer>

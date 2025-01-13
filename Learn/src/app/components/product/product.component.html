@@ -1,0 +1,29 @@
+<div class="mb-3">
+    <p-card>
+        <ng-template #header>
+            <!-- <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" 
+            style="height: 150px"
+            /> -->
+           <img src="{{product.image}}" class="w-100"> 
+        </ng-template>
+        <ng-template #title> 
+            {{ product.name }}    
+        </ng-template>
+        <ng-template #subtitle> 
+            {{ product.price }}    
+        </ng-template>
+
+        <p-rating
+        [(ngModel)] ="product.rating" readonly="true" />
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+        </p>
+        <ng-template #footer>
+            <div class="flex gap-4 mt-1">
+                <p-button label="Cancel" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full" />
+                <p-button label="Save" class="w-full" styleClass="w-full" />
+            </div>
+        </ng-template>
+    </p-card>
+</div>
