@@ -3,30 +3,26 @@ import { RouterOutlet } from '@angular/router';
 
 
 import { PrimeNG } from 'primeng/config';
-import { Product } from '../types';
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { HomeComponent } from "./components/home/home.component";
+import { FooterComponent } from "./components/footer/footer.component";
 
 @Component({
+  // component selector - the name of the html tag - directive name
   selector: 'app-root',
-  imports: [RouterOutlet],
+
+  imports: [RouterOutlet, NavbarComponent, HomeComponent, FooterComponent],
+  
   templateUrl: './app.component.html',
+  
+  
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'Learn';
-
   // constructor
   // before the component is created
   constructor(private primeng: PrimeNG) {
   }
-
-
-  products: Product[] = [];
-
-  onProductOutput(product: Product) {
-    console.log(product);
-  }
-
-  
   ngOnInit() {
 
     this.primeng.ripple.set(true);

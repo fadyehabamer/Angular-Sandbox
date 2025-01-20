@@ -1,0 +1,35 @@
+<section class="home">
+    <h1>Home</h1>
+    <p>Welcome to the Learn app!</p>
+    <p>Use the navigation bar to get started.</p>
+
+    <hr>
+    <h1>
+        <img [src]="myStore.imageUrl" alt="Store Image" width="100" height="100">
+        <br />
+        {{ myStore.name }}
+        <!-- <img src={{myStore.imageUrl}} alt="Store Image" width="100" height="100"> -->
+
+        <!-- Property Binding -->
+
+    </h1>
+
+    <p>
+        {{ myStore.description }}
+    </p>
+
+    <h3>
+        Address
+    </h3>
+    <ul>
+       
+        <li *ngFor="let branch of myStore.branches; let i = index">
+           {{branch}}
+
+        </li>
+
+    </ul>
+
+    
+
+</section>
