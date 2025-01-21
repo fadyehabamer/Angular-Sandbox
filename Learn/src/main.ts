@@ -8,4 +8,4 @@ bootstrapApplication(AppComponent, appConfig).catch((err) =>
 
 
 // first file to be run
-// first module to be loaded - AppModule
+// first Component to be loaded - starting point - APP COMPONENT

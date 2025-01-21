@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Istore } from '../../Models/istore';
 import { CommonModule } from '@angular/common';
+import { ProductsComponent } from "../products/products.component";
+import { CartComponent } from '../cart/cart.component';
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, ProductsComponent , CartComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
