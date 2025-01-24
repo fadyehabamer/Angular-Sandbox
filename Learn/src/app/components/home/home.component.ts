@@ -3,9 +3,10 @@ import { Istore } from '../../Models/istore';
 import { CommonModule } from '@angular/common';
 import { ProductsComponent } from "../products/products.component";
 import { CartComponent } from '../cart/cart.component';
+import { OrderComponent } from "../order/order.component";
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, ProductsComponent , CartComponent],
+  imports: [CommonModule, ProductsComponent, CartComponent, OrderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

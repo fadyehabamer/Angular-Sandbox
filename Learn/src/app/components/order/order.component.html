@@ -1,0 +1,23 @@
+<h1 class="text-center text-2xl font-bold my-4">
+    Total Order Value: {{totalOrderPrice}} LE
+</h1>
+
+<!--select bootstrap  -->
+<select class="form-select mb-4" [(ngModel)]="selectedCategoryId">
+    <!-- New Control Flow -->
+    <option value="0" selected>All Categories</option>
+    @for (category of categories; track $index) {
+    <option [value]="category.id">{{category.name}}</option>
+    }
+</select>
+
+
+<app-products
+    [recivedCategoryId]="selectedCategoryId" 
+    (OnTotalPriceChanged)="calcTotalPrice($event)"
+    class="row bg-info py-5 my-5"></app-products>
+
+
+<!-- <h1 class="text-center text-2xl font-bold my-4">
+    Total Order Value: {{totalOrderPrice}} LE
+</h1> -->

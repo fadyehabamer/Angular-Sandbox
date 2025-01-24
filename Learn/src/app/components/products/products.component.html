@@ -1,21 +1,14 @@
-<h1 class="text-center text-2xl font-bold my-4">
-    Total Order Value: {{totalOrderPrice}} LE
-</h1>
+ 
 
-<!--select bootstrap  -->
-<select class="form-select mb-4" [(ngModel)]="selectedCategoryId">
-    <option selected>Select Category</option>
-    <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-</select>
+<h2 lass="text-center text-2xl font-bold my-4">
+    {{myDate | date: 'short'}}
+</h2>
 
-<label for="Category">
-    <h1 class="text-center text-2xl font-bold my-4" *ngIf="selectedCategoryId != null">
-        selectedCategory
-        <span>
-            {{selectedCategoryId}}
-        </span>
-    </h1>
-</label>
+<h3>
+    Custom Pipe
+    {{customNumberPipe | squareNumber: 3 }}
+</h3>
+
 
 
 <!-- 
@@ -26,34 +19,25 @@
     index -- the index of the current item in the iteration.
     count -- the total number of items in the array.
 -->
-<div class="col-12 col-md-6 col-lg-4"
- *ngFor="let product of products ; 
-    let index = index; 
-    let even = even;
-    let odd = odd;
-    let first = first;
-    let last = last;
-    let count = count;
-    trackBy: trackByFn;
- "
-    [ngClass]="{'d-none': selectedCategoryId != null && selectedCategoryId != product.categoryId}">
-    <div class="mb-4 p-8 flex items-center justify-center"
-        [ngClass]="{'bg-danger': product.quantity == 0 , 'border border-lg border-danger': selectedCategoryId== product.categoryId}">
+
+@for (product of filteredProducts; track product.id) {
+<div class="col-12 col-md-6 col-lg-4">
+
+    <div class="mb-4 p-8 flex items-center justify-center">
         <p-card class="w-100">
             <ng-template #header>
                 <img alt="Card" class="w-100" [src]="product.imageUrl" style="max-height: 250px; object-fit:cover;" />
             </ng-template>
             <ng-template #title> {{product.name}} </ng-template>
-            <ng-template #subtitle> {{product.price}} LE -</ng-template>
-            
-            
+            <ng-template #subtitle> {{product.price | currency:"EUR"}} </ng-template>
+
+
             <span class="text-white" [style.background-color]="product.quantity > 0 ? 'green' : 'red'"
-                    *ngIf="product.quantity != 1; else lastItem"
-                >
-                {{product.quantity}} Available 
+                *ngIf="product.quantity != 1; else lastItem">
+                {{product.quantity}} Available
             </span>
             <ng-template #lastItem>
-                <span class="text-white bg-danger" >
+                <span class="text-white bg-danger">
                     Last Item
                 </span>
             </ng-template>
@@ -86,14 +70,19 @@
 
                     <p-button label="Add to Cart" class="w-100 mt-3" styleClass="w-100"
                         (click)="addToCart(product, quantity.value?.toString() || '0')"
-                        [disabled]="product.quantity == 0"
-                        />
+                        [disabled]="product.quantity == 0" />
 
                 </div>
             </ng-template>
         </p-card>
     </div>
 </div>
+}@empty {
+<div class="text-center">
+    <h1 class="text-2xl font-bold">No Products Found</h1>
+</div>
+}
+
 
 
 <!-- TO use images 

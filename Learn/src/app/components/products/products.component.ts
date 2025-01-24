@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // ngModel
 import { Iproduct } from '../../Models/iproduct';
@@ -10,7 +10,8 @@ import { SelectModule } from 'primeng/select';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ICategory } from '../../Models/icategory';
-
+import { HighlightElementDirective } from '../../directives/highlight-element.directive';
+import { SquareNumberPipe } from '../../Pipes/square-number.pipe';
 @Component({
   selector: 'app-products',
   imports: [
@@ -23,16 +24,26 @@ import { ICategory } from '../../Models/icategory';
     IftaLabelModule,
     InputNumberModule,
     FormsModule,
+    SquareNumberPipe,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnChanges {
   products: Iproduct[];
-  categories: ICategory[];
-  selectedCategoryId: number | undefined;
+  filteredProducts: Iproduct[] = [];
 
+  // want to show it in the order component
   totalOrderPrice: number = 0;
+
+  myDate: Date = new Date();
+  customNumberPipe: number = 4;
+
+  @Input() recivedCategoryId : number | undefined;
+
+
+  // define event
+  @Output() OnTotalPriceChanged : EventEmitter<number> = new EventEmitter<number>();
 
   constructor() {
     this.products = [
@@ -83,20 +94,11 @@ export class ProductsComponent {
       },
     ];
 
-    this.categories = [
-      {
-        id: 1,
-        name: 'Category 1',
-      },
-      {
-        id: 2,
-        name: 'Category 2',
-      },
-      {
-        id: 3,
-        name: 'Category 3',
-      },
-    ];
+   
+    this.filteredProducts = this.products;
+  }
+  ngOnChanges() {
+    this.filterProducts();
   }
 
   showId(id: number) {
@@ -108,11 +110,29 @@ export class ProductsComponent {
   addToCart(product: Iproduct, quantity: string) {
     this.totalOrderPrice += product.price * +quantity;
     product.quantity -= +quantity;
+
+    // emit event
+    this.OnTotalPriceChanged.emit(this.totalOrderPrice);
+
   }
 
-  trackByFn (index: number, product: Iproduct) {
+  trackByFn(index: number, product: Iproduct) {
     return product.id;
   }
 
+
+
+  // Filter products by category
+  filterProducts() {
+    if (this.recivedCategoryId == 0) {
+      this.filteredProducts = this.products;
+      return;
+    }
+    console.log(this.recivedCategoryId);
+
+    this.filteredProducts = this.products.filter(
+      (product) => product.categoryId == this.recivedCategoryId
+    );
+  }
   
 }

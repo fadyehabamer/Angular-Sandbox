@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-cart',
@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class CartComponent {
 
+  @Input() totalOrderPrice: number = 0;
+
+  constructor() { 
+  }
 }
