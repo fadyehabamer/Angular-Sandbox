@@ -12,12 +12,14 @@
 </select>
 
 
-<app-products
-    [recivedCategoryId]="selectedCategoryId" 
-    (OnTotalPriceChanged)="calcTotalPrice($event)"
+<app-products [recivedCategoryId]="selectedCategoryId" (OnTotalPriceChanged)="calcTotalPrice($event)"
     class="row bg-info py-5 my-5"></app-products>
 
 
-<!-- <h1 class="text-center text-2xl font-bold my-4">
-    Total Order Value: {{totalOrderPrice}} LE
-</h1> -->
+
+<label for="customerNameInput" class="form-label">Customer Name is :
+    {{customerNameInput.value}}
+
+</label>
+<input type="text" class="form-control" placeholder="Enter Your Name" #customerNameInput
+    (input)="customerNameInput.value" />
